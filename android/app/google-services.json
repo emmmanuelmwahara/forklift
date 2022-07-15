@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "259753958558",
+    "firebase_url": "https://forklift-69541-default-rtdb.firebaseio.com",
+    "project_id": "forklift-69541",
+    "storage_bucket": "forklift-69541.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:259753958558:android:fbaaa25041ca56e07baf8f",
+        "android_client_info": {
+          "package_name": "com.cumawa.forklift"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "259753958558-b0hddrnljs9c9nbo5ku25oh3tk33go7g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cumawa.forklift",
+            "certificate_hash": "79a2c2cc11920d4e132a59e950bc111807db4782"
+          }
+        },
+        {
+          "client_id": "259753958558-t98teui33ui3e2eei5b2in9pke216el3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDags-Bb9mLXn9FBMlbgkd88Ujd0vcXnXg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "259753958558-t98teui33ui3e2eei5b2in9pke216el3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
