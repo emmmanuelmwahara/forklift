@@ -12,6 +12,22 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final database = FirebaseDatabase.instance.reference().child('test');
   bool isOn = false;
+  int state = 0;
+
+  void _toggleState() {
+    if (state == 0) {
+      database.update({"state": 1});
+      setState(() {
+        state = 1;
+      });
+    } else {
+      database.update({"state": 0});
+      setState(() {
+        state = 0;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,15 +38,8 @@ class _HomeState extends State<Home> {
       body: Container(
         child: Center(
           child: ElevatedButton(
-            onPressed: () {
-              setState() {
-                isOn = !isOn;
-                database.update({
-                  'state': isOn,
-                });
-              }
-            },
-            child: Text(isOn ? "on" : "off"),
+            onPressed: _toggleState,
+            child: Text((state == 1) ? "on" : "off"),
           ),
         ),
       ),
