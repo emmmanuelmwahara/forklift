@@ -11,6 +11,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final database = FirebaseDatabase.instance.reference().child('test');
+  Color color = Colors.red;
   bool isOn = false;
   int state = 0;
   int hornState = 0;
@@ -47,21 +48,21 @@ class _HomeState extends State<Home> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ColoredBox(
-            color: Colors.blueAccent.shade100,
+            color: color,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
+                  const ForkButton(
+                    path: 'mast/up',
+                    child: Icon(
                       Icons.arrow_upward_outlined,
                       size: 30,
                     ),
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
+                  const ForkButton(
+                    path: 'mast/down',
+                    child: Icon(
                       Icons.arrow_downward_outlined,
                       size: 30,
                     ),
@@ -88,54 +89,43 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              print('tap');
-            },
-            onTapUp: (Ta) {},
-            child: const Text('try'),
-          ),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text('HORN'),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: _toggleState,
-              child: Text((state == 1) ? "on" : "off"),
+          const ForkButton(
+            path: 'horn',
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text('HORN'),
             ),
           ),
           ColoredBox(
             color: Colors.blue.shade50,
             child: Column(
               children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
+                const ForkButton(
+                  path: 'vehicle/forward',
+                  child: Icon(
                     Icons.arrow_upward_outlined,
                     size: 30,
                   ),
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
+                const ForkButton(
+                  path: 'vehicle/reverse',
+                  child: Icon(
                     Icons.arrow_downward_outlined,
                     size: 30,
                   ),
                 ),
                 Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
+                  children: const [
+                    ForkButton(
+                      path: 'vehicle/left',
+                      child: Icon(
                         Icons.arrow_left_outlined,
                         size: 30,
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
+                    ForkButton(
+                      path: 'vehicle/right',
+                      child: Icon(
                         Icons.arrow_right_outlined,
                         size: 30,
                       ),
@@ -147,6 +137,39 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
+    );
+  }
+}
+
+class ForkButton extends StatefulWidget {
+  final String path;
+  final Widget child;
+  const ForkButton({
+    Key? key,
+    required this.path,
+    required this.child,
+  }) : super(key: key);
+
+  @override
+  State<ForkButton> createState() => _ForkButtonState();
+}
+
+class _ForkButtonState extends State<ForkButton> {
+  final database = FirebaseDatabase.instance.reference().child('test');
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTapDown: (tapDown) {
+        database.update({
+          widget.path: 1,
+        });
+      },
+      onTapUp: (details) {
+        database.update({
+          widget.path: 0,
+        });
+      },
+      child: widget.child,
     );
   }
 }
